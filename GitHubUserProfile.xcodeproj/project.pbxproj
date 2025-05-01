@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CE439DBB2DC2F97A00D7165B /* Build configuration list for PBXProject "iOS-assessment" */;
+			buildConfigurationList = CE439DBB2DC2F97A00D7165B /* Build configuration list for PBXProject "GitHubUserProfile" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -314,7 +314,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CE439DBB2DC2F97A00D7165B /* Build configuration list for PBXProject "iOS-assessment" */ = {
+		CE439DBB2DC2F97A00D7165B /* Build configuration list for PBXProject "GitHubUserProfile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CE439DD62DC2F97D00D7165B /* Debug */,
