@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  GitHubUserProfileApp
 //
-//  Created by Siddharth Trivedi on 2025-05-02.
+//  Created by Mitali on 2025-05-02.
 //
 
 import UIKit
