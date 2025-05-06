@@ -21,13 +21,12 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         configureUI()
     }
     override func viewDidLayoutSubviews() {
-            super.viewDidLayoutSubviews()
-            avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
-        }
+        super.viewDidLayoutSubviews()
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
+    }
     
     private func configureUI() {
         usernameLabel.text = user.username

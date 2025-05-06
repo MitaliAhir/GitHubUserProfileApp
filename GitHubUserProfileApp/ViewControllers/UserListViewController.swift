@@ -15,10 +15,18 @@ class UserListViewController: UITableViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Refresh control
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(refreshUserList), for: .valueChanged)
+            tableView.refreshControl = refreshControl
         title = listType == .followers ? "Followers" : "Following"
         fetchUserList()
     }
     
+    @objc func refreshUserList() {
+        fetchUserList()
+        tableView.refreshControl?.endRefreshing()
+    }
     func fetchUserList() {
            APIClient.shared.fetchUserList(for: username, listType: listType) { [weak self] result in
                DispatchQueue.main.async {
@@ -38,11 +46,26 @@ class UserListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath)
-            let user = users[indexPath.row]
-            cell.textLabel?.text = user.username
-            return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? TableViewCell else {
+                return UITableViewCell()
+            }
+        
+        let user = users[indexPath.row]
+        cell.usernameLabel.text = user.username
+        
+        if let url = URL(string: user.avatarUrl) {
+                URLSession.shared.dataTask(with: url) { data, _, error in
+                    if let data = data, error == nil {
+                        DispatchQueue.main.async {
+                            cell.avatarImageView.image = UIImage(data: data)
+                        }
+                    }
+                }.resume()
+
         }
+        return cell
+    }
+
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             let selectedUser = users[indexPath.row]

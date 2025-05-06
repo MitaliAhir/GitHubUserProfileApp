@@ -22,8 +22,16 @@ class SearchUserViewController: UIViewController, UISearchBarDelegate {
         guard let username = searchBar.text, !username.isEmpty else { return }
         // Dismiss the keyboard
         searchBar.resignFirstResponder()
+        // Show loading indicator
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.startAnimating()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+        
         APIClient.shared.fetchUser(username: username) { [weak self] result in
             DispatchQueue.main.async {
+                activityIndicator.stopAnimating()
+                // Remove activity indicator
+                self?.navigationItem.rightBarButtonItem = nil
                 switch result {
                 case .success(let user):
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
